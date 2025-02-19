@@ -12,17 +12,38 @@ import {
   View,
   Text
 } from 'react-native'
+import Clock from './components/Clock'
+import { createStaticNavigation } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-function App () {
+function HomeScreen () {
   return (
-    <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior='automatic'>
+    <SafeAreaView style={{
+      backgroundColor: 'white',
+      margin: 'auto',
+      width: '100%',
+      padding: '60'
+    }}
+    >
+      <ScrollView contentInsetAdjustmentBehavior='scrollableAxes'>
         <View>
-          <Text>COUCOU (Miss Jirachi)</Text>
+          <Text>COUCOU</Text>
+          <Clock fontSize={30} />
         </View>
       </ScrollView>
     </SafeAreaView>
   )
 }
 
-export default App
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen
+  }
+})
+
+const Navigation = createStaticNavigation(RootStack)
+
+export default function App () {
+  return <Navigation />
+}
